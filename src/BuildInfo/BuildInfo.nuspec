@@ -6,6 +6,8 @@
 		<version>$version$</version>
 		<title>Build environment info for C#/VB</title>
 		<authors>Christoph Hornung</authors>
+		<licenseUrl>https://github.com/ChristophHornung/BuildInfo/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/ChristophHornung/BuildInfo</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<summary>Access build environment info directly from C#/VB code. Inspired by GitInfo.</summary>
 		<description>
