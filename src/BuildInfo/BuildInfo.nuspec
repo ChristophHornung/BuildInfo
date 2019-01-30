@@ -20,7 +20,6 @@
 			Inspired and best used with GitInfo.
 		</description>
 		<copyright>Copyright 2019</copyright>
-		<license type="expression">MIT</license>
 		<tags>MSBuild Versioning BuildId</tags>
 		<developmentDependency>true</developmentDependency>
 	</metadata>
