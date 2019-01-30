@@ -12,7 +12,7 @@
 
 	<Target Name="Build">
 		<PropertyGroup>
-			<Version>0.0.1</Version>
+			<Version>0.0.2</Version>
 			<Args>-Version $(Version) -NoPackageAnalysis -NonInteractive -OutputDirectory out</Args>
 		</PropertyGroup>
 

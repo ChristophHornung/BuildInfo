@@ -34,6 +34,7 @@
 		<BuildInfoThisAssembly Condition="'$(BuildInfoThisAssembly)' == '' And '$(BuildInfoThisAssemblyFile)' != ''">true</BuildInfoThisAssembly>
 		<BuildInfoThisAssemblyMetadataDefine Condition="'$(BuildInfoThisAssemblyMetadata)' == 'true'">ADDMETADATA</BuildInfoThisAssemblyMetadataDefine>
 		<BuildInfoThisAssemblyMetadataDefine Condition="'$(BuildInfoThisAssemblyMetadata)' != 'true'">NOMETADATA</BuildInfoThisAssemblyMetadataDefine>
+		<BuildId Condition="'$(BuildId)' == ''">0</BuildId>
 	</PropertyGroup>
 
 	<!-- Private properties -->
