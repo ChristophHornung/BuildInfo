@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!--
+  ==============================================================
+              Exposes common build information
+	
+	If the importing project has a C# or VB Language property, 
+	by default a ThisAssembly file/class will be generated 
+	containing assembly-level metadata for the git information, 
+	as well as a ThisAssembly static class with constants for 
+	all the available values.
+	
+	Customization:
+	
+	$(BuildInfoThisAssembly): set to 'false' to prevent assembly 
+						metadata and constants generation.
+
+	$(BuildInfoThisAssemblyMetadata): set to 'false' to prevent assembly 
+  								metadata generation only. Defaults 
+								to 'false'.
+	
+	$(BuildInfoAssemblyNamespace): allows overriding the namespace
+							  for the ThisAssembly class.
+							  Defaults to the global namespace.
+											
+	==============================================================
+	-->
+
+	<PropertyGroup>
+		<BuildInfoThisAssemblyFile
+			Condition="'$(BuildInfoThisAssemblyFile)' == '' And '$(DefaultLanguageSourceExtension)' != ''">$(IntermediateOutputPath)ThisAssembly.BuildInfo.g$(DefaultLanguageSourceExtension)</BuildInfoThisAssemblyFile>
+		<BuildInfoThisAssembly Condition="'$(Language)' != 'C#' And '$(Language)' != 'VB'">false</BuildInfoThisAssembly>
+		<BuildInfoThisAssembly Condition="'$(BuildInfoThisAssembly)' == '' And '$(BuildInfoThisAssemblyFile)' != ''">true</BuildInfoThisAssembly>
+		<BuildInfoThisAssemblyMetadataDefine Condition="'$(BuildInfoThisAssemblyMetadata)' == 'true'">ADDMETADATA</BuildInfoThisAssemblyMetadataDefine>
+		<BuildInfoThisAssemblyMetadataDefine Condition="'$(BuildInfoThisAssemblyMetadata)' != 'true'">NOMETADATA</BuildInfoThisAssemblyMetadataDefine>
+	</PropertyGroup>
+
+	<!-- Private properties -->
+	<PropertyGroup>
+		<CoreCompileDependsOn>
+			BuildInfoThisAssembly;
+			$(CoreCompileDependsOn)
+		</CoreCompileDependsOn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<BuildInfoThisAssemblyDependsOn>
+			_BuildInfoGenerateThisAssembly
+		</BuildInfoThisAssemblyDependsOn>
+	</PropertyGroup>
+
+	<Target Name="BuildInfoThisAssembly" DependsOnTargets="$(BuildInfoThisAssemblyDependsOn)"
+	        BeforeTargets="BuildOnlySettings" Condition="'$(BuildInfoThisAssembly)' == 'true'">
+
+		<ItemGroup>
+			<Compile Remove="$(BuildInfoThisAssemblyFile)" />
+			<Compile Include="$(BuildInfoThisAssemblyFile)" />
+			<!-- For the double compilation happening with XAML projects. -->
+			<_GeneratedCodeFiles Include="$(BuildInfoThisAssemblyFile)" />
+		</ItemGroup>
+
+	</Target>
+
+	<Target Name="_BuildInfoGenerateThisAssembly" Condition="'$(BuildInfoThisAssembly)' == 'true'"
+	        Outputs="$(BuildInfoThisAssemblyFile)">
+
+		<PropertyGroup>
+			<_ThisAssemblyContent>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)BuildInfo$(DefaultLanguageSourceExtension).pp'))</_ThisAssemblyContent>
+
+			<!-- The $NamespaceDefine$ replacement is turned into the GLOBALNAMESPACE define if the ThisAssemblyNamespace isn't empty.  -->
+			<_ThisAssemblyContent Condition="'$(ThisAssemblyNamespace)' != ''">$(_ThisAssemblyContent.Replace('$NamespaceDefine$', 'LOCALNAMESPACE'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent Condition="'$(ThisAssemblyNamespace)' == ''">$(_ThisAssemblyContent.Replace('$NamespaceDefine$', 'GLOBALNAMESPACE'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$MetadataDefine$', '$(BuildInfoThisAssemblyMetadataDefine)'))</_ThisAssemblyContent>
+
+			<_ThisAssemblyContent Condition="'$(ThisAssemblyNamespace)' != ''">$(_ThisAssemblyContent.Replace('RootNamespace.', '$(ThisAssemblyNamespace).'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent Condition="'$(ThisAssemblyNamespace)' == ''">$(_ThisAssemblyContent.Replace('RootNamespace.', ''))</_ThisAssemblyContent>
+
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('_RootNamespace_', '$(ThisAssemblyNamespace)'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildId$', '$(BuildId)'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildNumber$', '$(BuildNumber)'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildRepositoryClean$', '$(BuildRepositoryClean)'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$Username$', '$(Username)'))</_ThisAssemblyContent>
+		</PropertyGroup>
+
+		<PropertyGroup>
+			<BuildInfoThisAssemblyDir>$([System.IO.Path]::GetDirectoryName('$(BuildInfoThisAssemblyFile)'))</BuildInfoThisAssemblyDir>
+		</PropertyGroup>
+
+		<MakeDir Directories="$(BuildInfoThisAssemblyDir)" Condition="!Exists('$(BuildInfoThisAssemblyDir)')" />
+
+		<WriteLinesToFile File='$(BuildInfoThisAssemblyFile)' Lines='$(_ThisAssemblyContent)' Overwrite='true' />
+	</Target>
+
+	<PropertyGroup>
+		<BuildInfoImported>true</BuildInfoImported>
+	</PropertyGroup>
+</Project>

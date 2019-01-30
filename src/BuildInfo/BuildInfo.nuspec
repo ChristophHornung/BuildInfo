@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<package>
+	<metadata>
+		<id>BuildInfo</id>
+		<version>$version$</version>
+		<title>Build environment info for C#/VB</title>
+		<authors>Christoph Hornung</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<summary>Access build environment info directly from C#/VB code. Inspired by GitInfo.</summary>
+		<description>
+			Exposes the following information for use directly from C# and VB:
+
+			The generated code contains only constants, so it can be used to construct your own assembly/file version attributes:
+
+			[assembly: AssemblyVersion("1.0.0." + ThisAssembly.BuildEnv.BuildId]
+
+			Inspired and best used with GitInfo.
+		</description>
+		<copyright>Copyright 2019</copyright>
+		<license type="expression">MIT</license>
+		<tags>MSBuild Versioning BuildId</tags>
+		<developmentDependency>true</developmentDependency>
+	</metadata>
+	<files>
+		<file src="readme.txt" />
+		<file src="build\BuildInfo.cs.pp" target="build" />
+		<file src="build\BuildInfo.vb.pp" target="build" />
+		<file src="build\BuildInfo.targets" target="build" />
+		<file src="buildMultiTargeting\BuildInfo.targets" target="buildMultiTargeting" />
+	</files>
+</package>

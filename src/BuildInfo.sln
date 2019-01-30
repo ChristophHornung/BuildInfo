@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildInfo", "BuildInfo", "{6C97ACF2-57C2-496F-9D2F-2658A03AF5FF}"
+	ProjectSection(SolutionItems) = preProject
+		BuildInfo\build\BuildInfo.cs.pp = BuildInfo\build\BuildInfo.cs.pp
+		BuildInfo\BuildInfo.nuspec = BuildInfo\BuildInfo.nuspec
+		BuildInfo\build\BuildInfo.targets = BuildInfo\build\BuildInfo.targets
+		BuildInfo\build\BuildInfo.vb.pp = BuildInfo\build\BuildInfo.vb.pp
+		BuildInfo\readme.txt = BuildInfo\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msbuild", "msbuild", "{8C5CED1F-8558-4427-8F6F-B4EE82484328}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.proj = ..\build.proj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MultiTarget", "MultiTarget", "{EB970B24-0F17-4474-A7B0-4544AF650CDA}"
+	ProjectSection(SolutionItems) = preProject
+		BuildInfo\buildMultiTargeting\BuildInfo.targets = BuildInfo\buildMultiTargeting\BuildInfo.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB970B24-0F17-4474-A7B0-4544AF650CDA} = {6C97ACF2-57C2-496F-9D2F-2658A03AF5FF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D414101-9019-42FF-976B-1632A83C59D9}
+	EndGlobalSection
+EndGlobal

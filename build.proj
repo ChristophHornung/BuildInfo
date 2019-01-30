@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+		<NuGetPath>$(MSBuildThisFileDirectory).nuget</NuGetPath>
+		<NuGetExe>$(NuGetPath)\NuGet.exe</NuGetExe>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<NuGetExe>nuget</NuGetExe>
+	</PropertyGroup>
+
+	<Target Name="Build">
+		<PropertyGroup>
+			<Version>0.0.1-pre3</Version>
+			<Args>-Version $(Version) -NoPackageAnalysis -NonInteractive -OutputDirectory out</Args>
+		</PropertyGroup>
+
+		<MakeDir Directories="out" Condition="!Exists('out')" />
+
+		<Exec Command='"$(NuGetExe)" Pack "src\BuildInfo\BuildInfo.nuspec" $(Args)' />
+	</Target>
+
+	<Import Project="src\BuildInfo\build\BuildInfo.targets" />
+	
+</Project>
