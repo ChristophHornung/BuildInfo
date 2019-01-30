@@ -34,7 +34,10 @@
 		<BuildInfoThisAssembly Condition="'$(BuildInfoThisAssembly)' == '' And '$(BuildInfoThisAssemblyFile)' != ''">true</BuildInfoThisAssembly>
 		<BuildInfoThisAssemblyMetadataDefine Condition="'$(BuildInfoThisAssemblyMetadata)' == 'true'">ADDMETADATA</BuildInfoThisAssemblyMetadataDefine>
 		<BuildInfoThisAssemblyMetadataDefine Condition="'$(BuildInfoThisAssemblyMetadata)' != 'true'">NOMETADATA</BuildInfoThisAssemblyMetadataDefine>
+		<BuildId Condition="'$(BuildId)' == ''">$(Build_BuildId)</BuildId>
 		<BuildId Condition="'$(BuildId)' == ''">0</BuildId>
+		<BuildNumber Condition="'$(BuildNumber)' == ''">$(Build_BuildNumber)</BuildNumber>
+		<BuildNumber Condition="'$(BuildNumber)' == ''">0</BuildNumber>
 	</PropertyGroup>
 
 	<!-- Private properties -->
@@ -80,7 +83,7 @@
 			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('_RootNamespace_', '$(ThisAssemblyNamespace)'))</_ThisAssemblyContent>
 			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildId$', '$(BuildId)'))</_ThisAssemblyContent>
 			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildNumber$', '$(BuildNumber)'))</_ThisAssemblyContent>
-			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildRepositoryClean$', '$(BuildRepositoryClean)'))</_ThisAssemblyContent>
+			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$BuildRepositoryClean$', '$(Build_Repository_Clean)'))</_ThisAssemblyContent>
 			<_ThisAssemblyContent>$(_ThisAssemblyContent.Replace('$Username$', '$(Username)'))</_ThisAssemblyContent>
 		</PropertyGroup>
 
