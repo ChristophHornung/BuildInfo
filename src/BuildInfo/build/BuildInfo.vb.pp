@@ -20,16 +20,16 @@ Namespace Global
        ''' <summary>Provides access to build environment information for the current assembly.</summary>
        Partial Public Class BuildEnv
            ''' <summary>BuildId: $BuildId$</summary>
-           Public Const BuildId As String = "$BuildId$";
+           Public Const BuildId As String = "$BuildId$"
 
            ''' <summary>BuildNumber: $BuildNumber$</summary>
-           Public Const BuildNumber As String = "$BuildNumber$";
+           Public Const BuildNumber As String = "$BuildNumber$"
 
            ''' <summary>BuildRepositoryClean: $BuildRepositoryClean$</summary>
-           Public Const BuildRepositoryClean As String = "$BuildRepositoryClean$";
+           Public Const BuildRepositoryClean As String = "$BuildRepositoryClean$"
 
            ''' <summary>Username: $Username$</summary>
-           Public Const Username As String = "$Username$";
+           Public Const Username As String = "$Username$"
         End Class
 
     End Class
