@@ -2,3 +2,4 @@
 out
 /GitInfo.cache
 *.suo
+**/.vs/

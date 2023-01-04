@@ -6,9 +6,10 @@
 		<version>$version$</version>
 		<title>Build environment info for C#/VB</title>
 		<authors>Christoph Hornung</authors>
-		<licenseUrl>https://github.com/ChristophHornung/BuildInfo/blob/master/LICENSE</licenseUrl>
+		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/ChristophHornung/BuildInfo</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<readme>readme.md</readme>
 		<summary>Access build environment info directly from C#/VB code. Inspired by GitInfo.</summary>
 		<description>
 			Exposes the following information for use directly from C# and VB:
@@ -24,7 +25,7 @@
 		<developmentDependency>true</developmentDependency>
 	</metadata>
 	<files>
-		<file src="readme.txt" />
+		<file src="..\..\readme.md" />
 		<file src="build\BuildInfo.cs.pp" target="build" />
 		<file src="build\BuildInfo.vb.pp" target="build" />
 		<file src="build\BuildInfo.targets" target="build" />
